@@ -174,9 +174,36 @@ console.log(
 */
 
 // 11. დაწერეთ პროგრამა მრავალ მასივებს შორის საერთო ელემენტების მოსაძებნად.
+// უნდა გამოიტანოს [2, 3]
 
-// function findCommonElements(arr1, arr2) {}
 
-// console.log(
-//   findCommonElements([1, 2, 3], [2, 3, 4], [1, 2, 3, 5], [1, 2, 3, 9], [2, 3])
-// ); // [2, 3]
+// პირველი ამოხსნის ვერსია:
+//  function commonElements(...arrays) {
+//      let baseArr = arrays[0];
+//      let commonElements = [];
+//
+//      for (let number of baseArr) {
+//          let common = true;
+//          for (let i = 1; i < arrays.length; i++) {
+//              if (!arrays[i].includes(number)) {
+//                  common = false;
+//                  break;
+//              }
+//          }
+//          if (common) {
+//              commonElements.push(number);
+//          }
+//      }
+//      return commonElements;
+//  }
+// console.log(commonElements([1, 2, 3], [2, 3, 4], [1, 2, 3, 5], [1, 2, 3, 9], [2, 3]));
+
+
+
+//მეორე ვერსია:
+// const commonElements = (...arrays) => {
+//     const baseArr = arrays[0];
+//     return baseArr.filter((number) => arrays.every((arr) => arr.includes(number))
+//     );
+// };
+// console.log(commonElements([1, 2, 3], [2, 3, 4], [1, 2, 3, 5], [1, 2, 3, 9], [2, 3]));
