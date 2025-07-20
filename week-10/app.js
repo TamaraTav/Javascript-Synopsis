@@ -65,14 +65,33 @@
 
 // PATCH
 
-async function patchData(id, payload) {
+// async function patchData(id, payload) {
+//   try {
+//     const response = await fetch(`http://localhost:3000/posts/${id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(payload),
+//     });
+//     if (!response.ok) {
+//       throw new Error(`Network response was not ok ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// patchData(2, { title: "foo2" });
+
+// DELETE
+
+async function deleteData(id) {
   try {
     const response = await fetch(`http://localhost:3000/posts/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+      method: "DELETE",
     });
     if (!response.ok) {
       throw new Error(`Network response was not ok ${response.status}`);
@@ -84,4 +103,4 @@ async function patchData(id, payload) {
   }
 }
 
-patchData(2, { title: "foo2" });
+deleteData(2);
