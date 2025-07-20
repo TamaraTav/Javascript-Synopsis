@@ -88,13 +88,32 @@
 
 // DELETE
 
-async function deleteData(id) {
+// async function deleteData(id) {
+//   try {
+//     const response = await fetch(`http://localhost:3000/posts/${id}`, {
+//       method: "DELETE",
+//     });
+//     if (!response.ok) {
+//       throw new Error(`Network response was not ok ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// deleteData(2);
+
+// Query Parameters
+
+async function fetchData() {
   try {
-    const response = await fetch(`http://localhost:3000/posts/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+        "http://localhost:3000/todos?completed=true&title=Todo 2"
+    );
     if (!response.ok) {
-      throw new Error(`Network response was not ok ${response.status}`);
+      throw new Error("Network response was not ok");
     }
     const data = await response.json();
     console.log(data);
@@ -103,4 +122,4 @@ async function deleteData(id) {
   }
 }
 
-deleteData(2);
+fetchData();
