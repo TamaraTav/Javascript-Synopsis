@@ -42,10 +42,33 @@
 
 // PUT
 
-async function putData(id, payload) {
+// async function putData(id, payload) {
+//   try {
+//     const response = await fetch(`http://localhost:3000/posts/${id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(payload),
+//     });
+//     if (!response.ok) {
+//       throw new Error(`Network response was not ok ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// putData(2, { title: "foo1", content: "bar" });
+
+// PATCH
+
+async function patchData(id, payload) {
   try {
     const response = await fetch(`http://localhost:3000/posts/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -61,4 +84,4 @@ async function putData(id, payload) {
   }
 }
 
-putData(2, { title: "foo1", content: "bar" });
+patchData(2, { title: "foo2" });
