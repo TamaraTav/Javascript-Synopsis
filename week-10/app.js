@@ -16,17 +16,40 @@
 // fetchData();
 
 // POST
-async function postData() {
+// async function postData() {
+//   try {
+//     const response = await fetch("http://localhost:3000/posts", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         title: "foo",
+//         content: "bar",
+//       }),
+//     });
+//     if (!response.ok) {
+//       throw new Error(`Network response was not ok ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+//postData();
+
+// PUT
+
+async function putData(id, payload) {
   try {
-    const response = await fetch("http://localhost:3000/posts", {
-      method: "POST",
+    const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: "foo",
-        content: "bar",
-      }),
+      body: JSON.stringify(payload),
     });
     if (!response.ok) {
       throw new Error(`Network response was not ok ${response.status}`);
@@ -38,4 +61,4 @@ async function postData() {
   }
 }
 
-postData();
+putData(2, { title: "foo1", content: "bar" });
