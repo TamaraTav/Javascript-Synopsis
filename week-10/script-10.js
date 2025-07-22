@@ -134,3 +134,102 @@ async function deleteProduct(id) {
 }
 
 // deleteProduct(1);
+
+async function getUsers() {
+    try {
+        const response = await fetch(`${API_URL}/users`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// getUsers();
+
+async function getUser(id) {
+    try {
+        const response = await fetch(`${API_URL}/users/${id}`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch user");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+getUser(1);
+
+async function createUser(payload) {
+    try {
+        const response = await fetch(`${API_URL}/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to create user");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// createUser({
+//   name: "Alice",
+//   email: "alice@gmail.com",
+//   cart: [],
+//   purchaseHistory: [],
+// });
+
+async function updateUser(id, payload) {
+    try {
+        const response = await fetch(`${API_URL}/users/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update user");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// updateUser(1, { email: "user@gmail.com" });
+
+async function deleteUser(id) {
+    try {
+        const response = await fetch(`${API_URL}/users/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete user");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// deleteUser(1);
