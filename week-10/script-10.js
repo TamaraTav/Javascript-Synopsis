@@ -31,3 +31,38 @@ Requirements:
     - cart: An array of products that the user has added to their shopping cart.
     - purchaseHistory: An array of products that the user has purchased.
 */
+const API_URL = "http://localhost:3000";
+
+for (let i = 0; i < 5; i++) {}
+
+async function fetchProducts() {
+    try {
+        const response = await fetch(`${API_URL}/users`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// fetchProducts();
+
+const fetchSingleProduct = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch product");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+// fetchSingleProduct(2);
