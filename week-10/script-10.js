@@ -269,3 +269,38 @@ async function addProductToCart(userId, productId) {
 }
 
 // addProductToCart(1, 4);
+
+
+
+async function purchaseProducts(userId) {
+    try {
+        const getUserResponse = await fetch(`${API_URL}/users/${userId}`);
+        if (!getUserResponse.ok) {
+            throw new Error("Failed to fetch user");
+        }
+        const user = await getUserResponse.json();
+        const purchaseHistory = user.purchaseHistory;
+
+        const userCart = user.cart;
+
+        purchaseHistory.push(...userCart);
+
+        const userResponse = await fetch(`${API_URL}/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cart: [], purchaseHistory: purchaseHistory }),
+        });
+        if (!userResponse.ok) {
+            throw new Error("Failed to update user");
+        }
+        const data = await userResponse.json();
+        console.log(data);
+
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+purchaseProducts(1);
