@@ -66,3 +66,71 @@ const fetchSingleProduct = async (id) => {
 };
 
 // fetchSingleProduct(2);
+
+async function addProduct(payload) {
+    try {
+        const response = await fetch(`${API_URL}/products`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to add product");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// addProduct({
+//   name: "Laptop",
+//   price: 1000,
+//   description: "A high-performance laptop",
+//   category: "electronics",
+//   stock: 10,
+// });
+
+async function changeProduct(id, payload) {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update product");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// changeProduct(1, { price: 40 });
+
+async function deleteProduct(id) {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete product");
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// deleteProduct(1);
