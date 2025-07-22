@@ -233,3 +233,39 @@ async function deleteUser(id) {
 }
 
 // deleteUser(1);
+
+
+async function addProductToCart(userId, productId) {
+    try {
+        const productResponse = await fetch(`${API_URL}/products/${productId}`);
+        if (!productResponse.ok) {
+            throw new Error("Failed to fetch product");
+        }
+        const product = await productResponse.json();
+
+        const getUserResponse = await fetch(`${API_URL}/users/${userId}`);
+        if (!getUserResponse.ok) {
+            throw new Error("Failed to fetch user");
+        }
+        const user = await getUserResponse.json();
+        const userCart = user.cart;
+        userCart.push(product);
+
+        const userResponse = await fetch(`${API_URL}/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cart: userCart }),
+        });
+        if (!userResponse.ok) {
+            throw new Error("Failed to update user");
+        }
+        const data = await userResponse.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+// addProductToCart(1, 4);
