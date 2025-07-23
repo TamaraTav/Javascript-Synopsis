@@ -282,22 +282,38 @@ async function purchaseProducts(userId) {
         const purchaseHistory = user.purchaseHistory;
 
         const userCart = user.cart;
+        const updatedUserCart = [];
+        for (const product of userCart) {
+            const updatedStock = product.stock - 1;
 
-        purchaseHistory.push(...userCart);
+            const productResponse = await fetch(`${API_URL}/products/${product.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ stock: updatedStock }),
+            });
+            if (!productResponse.ok) {
+                throw new Error("Failed to update product");
+            }
+            await productResponse.json();
+            updatedUserCart.push({ ...product, stock: updatedStock });
+        }
+        console.log("updatedUserCart", updatedUserCart);
+        purchaseHistory.push(...updatedUserCart);
 
         const userResponse = await fetch(`${API_URL}/users/${userId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ cart: [], purchaseHistory: purchaseHistory }),
+            body: JSON.stringify({ cart: [], purchaseHistory }),
         });
         if (!userResponse.ok) {
             throw new Error("Failed to update user");
         }
         const data = await userResponse.json();
         console.log(data);
-
     } catch (error) {
         console.error(error.message);
     }
