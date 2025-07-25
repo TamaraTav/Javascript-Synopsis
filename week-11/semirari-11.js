@@ -22,23 +22,35 @@
 // 2. მემკვიდრეობითობა: შექმენით კლასი "Student", რომელიც იქნება "Person"-ის შთამომავალი.
 // დაამატეთ ახალი "grade" ფროფერთი.
 
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
+// class Person {
+//     constructor(name, age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+//
+//     sayHello() {
+//         return "hi";
+//     }
+// }
+//
+// class Student extends Person {
+//   constructor(name, age, grade) {
+//     super(name, age); // ამ სუპერ ჩაშენებული ფუნქციით ვიძახებთ მშობელს და მემკვიდრეობით მისგან მოგვაქვს
+//     this.grade = grade;
+//   }
+// }
+//
+// const student = new Student("Alice", 25, 90);
+// console.log(student.grade);
 
-    sayHello() {
-        return "hi";
-    }
-}
 
-class Student extends Person {
-  constructor(name, age, grade) {
-    super(name, age); // ამ სუპერ ჩაშენებული ფუნქციით ვიძახებთ მშობელს და მემკვიდრეობით მისგან მოგვაქვს
-    this.grade = grade;
+// 3. სტატიკური მეთოდი: შექმენით კლასი "Calculator" სტატიკური მეთოდით,
+// რომელიც პარამეტრად მიიღებს ორ რიცხვს და დააბრუნებს მათ ჯამს.
+
+class Calculator {
+    //ეს ქქვედა მეთოდი გამოვა სტატიკური, რადგან ვიყებენ სიტყვას static
+  static sum(a, b) {
+    return a + b;
   }
 }
-
-const student = new Student("Alice", 25, 90);
-console.log(student.grade);
+console.log(Calculator.sum(5, 10));
